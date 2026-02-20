@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Download, Copy, CheckCircle2 } from 'lucide-react';
+import { Download, Copy, CheckCircle2, FileSpreadsheet } from 'lucide-react';
 import TestCaseCard from './TestCaseCard';
 import { useTestCaseExport } from '../hooks/useTestCaseExport';
 import type { TestSuite } from '../backend';
@@ -13,7 +13,7 @@ interface TestCaseDisplayProps {
 }
 
 export default function TestCaseDisplay({ testSuite }: TestCaseDisplayProps) {
-  const { copyToClipboard, downloadAsFile, copied } = useTestCaseExport();
+  const { copyToClipboard, downloadAsFile, exportToExcel, copied, exporting } = useTestCaseExport();
   const [activeTab, setActiveTab] = useState('all');
 
   const categories = [
@@ -76,6 +76,24 @@ export default function TestCaseDisplay({ testSuite }: TestCaseDisplayProps) {
         >
           <Download className="h-4 w-4" />
           Download as Text
+        </Button>
+        <Button
+          onClick={() => exportToExcel(testSuite)}
+          variant="outline"
+          className="gap-2"
+          disabled={exporting}
+        >
+          {exporting ? (
+            <>
+              <FileSpreadsheet className="h-4 w-4 animate-pulse" />
+              Exporting...
+            </>
+          ) : (
+            <>
+              <FileSpreadsheet className="h-4 w-4" />
+              Export to Excel
+            </>
+          )}
         </Button>
       </div>
 

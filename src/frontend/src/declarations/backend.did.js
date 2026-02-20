@@ -21,6 +21,7 @@ export const _CaffeineStorageRefillResult = IDL.Record({
 });
 export const TestCase = IDL.Record({
   'id' : IDL.Nat,
+  'title' : IDL.Text,
   'expectedResults' : IDL.Vec(IDL.Text),
   'type' : IDL.Text,
   'preconditions' : IDL.Vec(IDL.Text),
@@ -83,6 +84,7 @@ export const idlFactory = ({ IDL }) => {
   });
   const TestCase = IDL.Record({
     'id' : IDL.Nat,
+    'title' : IDL.Text,
     'expectedResults' : IDL.Vec(IDL.Text),
     'type' : IDL.Text,
     'preconditions' : IDL.Vec(IDL.Text),

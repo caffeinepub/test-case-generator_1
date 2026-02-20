@@ -12,6 +12,7 @@ import type { Principal } from '@icp-sdk/core/principal';
 
 export interface TestCase {
   'id' : bigint,
+  'title' : string,
   'expectedResults' : Array<string>,
   'type' : string,
   'preconditions' : Array<string>,

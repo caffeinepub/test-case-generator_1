@@ -3,11 +3,12 @@ import type { TestSuite, TestCase } from '../backend';
 
 export function useTestCaseExport() {
   const [copied, setCopied] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
   const formatTestCase = (testCase: TestCase): string => {
     let output = `Test Case ID: TC-${testCase.id}\n`;
     output += `Type: ${testCase.type}\n`;
-    output += `Description: ${testCase.description}\n\n`;
+    output += `Title: ${testCase.title}\n\n`;
 
     if (testCase.preconditions.length > 0) {
       output += `Preconditions:\n`;
@@ -90,9 +91,87 @@ export function useTestCaseExport() {
     URL.revokeObjectURL(url);
   }, []);
 
+  const escapeCSV = (value: string): string => {
+    // Escape double quotes and wrap in quotes if contains comma, newline, or quote
+    if (value.includes('"') || value.includes(',') || value.includes('\n')) {
+      return `"${value.replace(/"/g, '""')}"`;
+    }
+    return value;
+  };
+
+  const exportToExcel = useCallback((testSuite: TestSuite) => {
+    setExporting(true);
+    try {
+      // Collect all test cases from all categories
+      const rows: string[] = [];
+      
+      // Add header row
+      rows.push('Title,Precondition,Steps');
+
+      const categories = [
+        { name: 'Functional', data: testSuite.functional },
+        { name: 'Boundary', data: testSuite.boundary },
+        { name: 'Edge Cases', data: testSuite.edgeCases },
+        { name: 'Exploratory', data: testSuite.exploratory },
+        { name: 'Positive', data: testSuite.positive },
+        { name: 'Negative', data: testSuite.negative },
+      ];
+
+      categories.forEach(category => {
+        category.data.forEach(testCase => {
+          // Format preconditions
+          const preconditionText = testCase.preconditions.length > 0
+            ? testCase.preconditions.map((pre, idx) => `${idx + 1}. ${pre}`).join('\n')
+            : 'None';
+
+          // Format steps as numbered list
+          const stepsText = testCase.steps
+            .map((step, idx) => `${idx + 1}. ${step}`)
+            .join('\n');
+
+          // Add row with escaped CSV values using title instead of description
+          rows.push(
+            `${escapeCSV(testCase.title)},${escapeCSV(preconditionText)},${escapeCSV(stepsText)}`
+          );
+        });
+      });
+
+      // Create CSV content
+      const csvContent = rows.join('\n');
+
+      // Create blob with UTF-8 BOM for Excel compatibility
+      const BOM = '\uFEFF';
+      const blob = new Blob([BOM + csvContent], { 
+        type: 'text/csv;charset=utf-8;' 
+      });
+
+      // Create download link
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      // Generate filename with current date - use .csv extension
+      const fileName = `test-cases-${new Date().toISOString().split('T')[0]}.csv`;
+      link.download = fileName;
+      
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      setTimeout(() => setExporting(false), 1000);
+    } catch (err) {
+      console.error('Failed to export to Excel:', err);
+      setExporting(false);
+    }
+  }, []);
+
   return {
     copyToClipboard,
     downloadAsFile,
+    exportToExcel,
     copied,
+    exporting,
   };
 }

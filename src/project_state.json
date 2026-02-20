@@ -1,14 +1,19 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 9,
   "summary": "Test case generation app that takes Word documents of user stories and requirements as input and generates comprehensive test cases (functional, boundary, edge, exploratory, positive, and negative) with steps, preconditions, and natural execution order",
   "architectural_notes": [
     "Document parsing: Need to extract user stories and requirements from Word (.docx) files",
     "Test case generation engine: Must produce comprehensive test coverage across multiple categories",
-    "Test case structure: Each test case needs steps, preconditions (optional), expected results, and test type classification"
+    "Test case structure: Each test case needs steps, preconditions (optional), expected results, and test type classification",
+    "Excel export: Need to generate downloadable .xlsx files containing test case data (title, precondition, steps)"
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Test case names are not descriptive or meaningful",
+    "Generated test cases are missing detailed steps",
+    "Test case titles still contain garbage or non-descriptive content"
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-implement-file-upload-functionality-that-accepts-word-document-files-doc-docx-containing-user-stories-and-requirements",
@@ -31,6 +36,38 @@
       "title": "Apply a professional, testing-focused visual design that emphasizes clarity and readability with a modern, sophisticated color scheme and clean typography",
       "reqIds": [
         "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-testcasecard-component-to-properly-display-the-detailed-test-steps-in-the-numbered-format",
+      "title": "Update the TestCaseCard component to properly display the detailed test steps in the numbered format",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-excel-file-generation-functionality-that-creates-a-downloadable-xlsx-file-containing-test-cases-with-columns-for-title-precondition-and-steps",
+      "title": "Implement Excel file generation functionality that creates a downloadable .xlsx file containing test cases with columns for title, precondition, and steps",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-export-to-excel-button-in-the-testcasedisplay-component-alongside-the-existing-copy-and-download-buttons",
+      "title": "Add an 'Export to Excel' button in the TestCaseDisplay component alongside the existing copy and download buttons",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-the-usetestcaseexport-hook-or-create-a-new-hook-to-handle-excel-export-by-integrating-an-excel-generation-library-and-formatting-testsuite-data-into-spreadsheet-format",
+      "title": "Extend the useTestCaseExport hook (or create a new hook) to handle Excel export by integrating an Excel generation library and formatting TestSuite data into spreadsheet format",
+      "reqIds": [
+        "REQ-16"
       ],
       "version": 1
     }
@@ -125,6 +162,44 @@
       "summary": "Order generated test cases in a natural execution sequence that follows logical testing flow",
       "reqIds": [
         "REQ-8"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Generate descriptive, meaningful test case names that clearly indicate what is being tested instead of generic or unclear names",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Generate detailed test steps for each test case that provide clear, numbered, actionable instructions for executing the test",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Provide downloadable Excel file export of test cases including title, precondition, and steps",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Update the backend test case generation logic in main.mo to ensure all test case titles are clean, descriptive, and meaningful without any garbage characters, placeholder text, or non-descriptive content",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Verify that test case title generation produces semantically meaningful names that accurately reflect the test scenario based on the input requirements",
+      "reqIds": [
+        "REQ-18"
       ],
       "status": "pending"
     }

@@ -9,6 +9,7 @@ export interface None {
 export type Option<T> = Some<T> | None;
 export interface TestCase {
     id: bigint;
+    title: string;
     expectedResults: Array<string>;
     type: string;
     preconditions: Array<string>;

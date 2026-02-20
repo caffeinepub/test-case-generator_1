@@ -33,7 +33,7 @@ export default function TestCaseCard({ testCase, categoryColor = 'default' }: Te
               </Badge>
               <Badge variant="secondary">{testCase.type}</Badge>
             </div>
-            <CardTitle className="text-lg leading-tight">{testCase.description}</CardTitle>
+            <CardTitle className="text-lg leading-tight">{testCase.title}</CardTitle>
           </div>
         </div>
       </CardHeader>

@@ -1,7 +1,8 @@
-import Text "mo:core/Text";
 import Array "mo:core/Array";
 import MixinStorage "blob-storage/Mixin";
 import Storage "blob-storage/Storage";
+import Nat "mo:core/Nat";
+import Text "mo:core/Text";
 
 actor {
   include MixinStorage();
@@ -9,6 +10,7 @@ actor {
   type TestCase = {
     id : Nat;
     type_ : Text;
+    title : Text;
     description : Text;
     steps : [Text];
     preconditions : [Text];
@@ -25,88 +27,92 @@ actor {
     orderedSequence : [TestCase];
   };
 
-  // Simulated requirement processing (actual file parsing done externally)
+  func createTestCases(
+    requirements : [Text],
+    id : Nat,
+    type_ : Text,
+    stepPrefix : Text,
+    preconditionPrefix : ?Text,
+    expectedResultPrefix : Text,
+  ) : [TestCase] {
+    requirements.map(
+      func(req) {
+        {
+          id;
+          type_;
+          title = type_ # " Test: " # req;
+          description = type_ # " test for: " # req;
+          steps = [stepPrefix # " Step 1"];
+          preconditions = switch (preconditionPrefix) {
+            case (null) { [] };
+            case (?prefix) { [prefix # " Precondition 1"] };
+          };
+          expectedResults = [expectedResultPrefix # " Result 1"];
+        };
+      }
+    );
+  };
+
+  func concatArrays(arrays : [[TestCase]]) : [TestCase] {
+    arrays.flatMap(func(array) { array.values() });
+  };
+
   func generateTestCases(requirements : [Text]) : TestSuite {
-    let functional = requirements.map(
-      func(req) {
-        {
-          id = 1;
-          type_ = "Functional";
-          description = "Functional test for " # req;
-          steps = ["Step 1", "Step 2"];
-          preconditions = ["Precondition 1"];
-          expectedResults = ["Expected result 1"];
-        };
-      }
+    let functional = createTestCases(
+      requirements,
+      1,
+      "Functional",
+      "Functional",
+      ?"Functional",
+      "Functional",
     );
 
-    let boundary = requirements.map(
-      func(req) {
-        {
-          id = 2;
-          type_ = "Boundary";
-          description = "Boundary test for " # req;
-          steps = ["Boundary step 1"];
-          preconditions = [];
-          expectedResults = ["Boundary result"];
-        };
-      }
+    let boundary = createTestCases(
+      requirements,
+      2,
+      "Boundary",
+      "Boundary",
+      ?"Boundary",
+      "Boundary",
     );
 
-    let edgeCases = requirements.map(
-      func(req) {
-        {
-          id = 3;
-          type_ = "Edge Case";
-          description = "Edge case test for " # req;
-          steps = ["Edge case step 1"];
-          preconditions = [];
-          expectedResults = ["Edge case result"];
-        };
-      }
+    let edgeCases = createTestCases(
+      requirements,
+      3,
+      "Edge Case",
+      "Edge",
+      ?"Edge",
+      "Edge",
     );
 
-    let exploratory = requirements.map(
-      func(req) {
-        {
-          id = 4;
-          type_ = "Exploratory";
-          description = "Exploratory test for " # req;
-          steps = ["Explore step 1"];
-          preconditions = [];
-          expectedResults = ["Explore result"];
-        };
-      }
+    let exploratory = createTestCases(
+      requirements,
+      4,
+      "Exploratory",
+      "Exploratory",
+      ?"Exploratory",
+      "Exploratory",
     );
 
-    let positive = requirements.map(
-      func(req) {
-        {
-          id = 5;
-          type_ = "Positive";
-          description = "Positive test for " # req;
-          steps = ["Positive step 1"];
-          preconditions = [];
-          expectedResults = ["Positive result"];
-        };
-      }
+    let positive = createTestCases(
+      requirements,
+      5,
+      "Positive",
+      "Positive",
+      ?"Positive",
+      "Positive",
     );
 
-    let negative = requirements.map(
-      func(req) {
-        {
-          id = 6;
-          type_ = "Negative";
-          description = "Negative test for " # req;
-          steps = ["Negative step 1"];
-          preconditions = [];
-          expectedResults = ["Negative result"];
-        };
-      }
+    let negative = createTestCases(
+      requirements,
+      6,
+      "Negative",
+      "Negative",
+      ?"Negative",
+      "Negative",
     );
 
-    // Order functional first, then boundary, edge, exploratory, positive, negative
-    let orderedSequence = functional.concat(boundary).concat(edgeCases).concat(exploratory).concat(positive).concat(negative);
+    let orderedSequence = concatArrays([functional, boundary, edgeCases, exploratory, positive, negative]);
 
     {
       functional;
