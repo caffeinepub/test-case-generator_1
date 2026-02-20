@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Test case generation app that takes Word documents of user stories and requirements as input and generates comprehensive test cases (functional, boundary, edge, exploratory, positive, and negative) with steps, preconditions, and natural execution order",
+  "architectural_notes": [
+    "Document parsing: Need to extract user stories and requirements from Word (.docx) files",
+    "Test case generation engine: Must produce comprehensive test coverage across multiple categories",
+    "Test case structure: Each test case needs steps, preconditions (optional), expected results, and test type classification"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-file-upload-functionality-that-accepts-word-document-files-doc-docx-containing-user-stories-and-requirements",
+      "title": "Implement file upload functionality that accepts Word document files (.doc, .docx) containing user stories and requirements",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-generated-test-cases-in-an-organized-readable-format-with-clear-categorization-by-test-type-functional-boundary-edge-exploratory-positive-negative",
+      "title": "Display generated test cases in an organized, readable format with clear categorization by test type (functional, boundary, edge, exploratory, positive, negative)",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-professional-testing-focused-visual-design-that-emphasizes-clarity-and-readability-with-a-modern-sophisticated-color-scheme-and-clean-typography",
+      "title": "Apply a professional, testing-focused visual design that emphasizes clarity and readability with a modern, sophisticated color scheme and clean typography",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Upload and parse Word documents containing user stories and requirements",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Generate functional test cases with steps and preconditions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Generate boundary and edge case test cases",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Generate exploratory test cases",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Include both positive and negative test scenarios",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Order test cases in natural execution sequence",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Parse uploaded Word documents to extract user stories and requirements text content",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Generate functional test cases with detailed steps and preconditions when applicable based on parsed requirements",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Generate boundary test cases that test limits and edge conditions of the requirements",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Generate edge case test cases that cover unusual or extreme scenarios",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Generate exploratory test cases that encourage creative testing approaches beyond specified requirements",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Generate both positive test cases (expected behavior) and negative test cases (error handling and invalid inputs)",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Order generated test cases in a natural execution sequence that follows logical testing flow",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Test Case Generator",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

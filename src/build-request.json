@@ -1,0 +1,209 @@
+{
+  "kind": "build_request",
+  "title": "Create test case generation app for Word documents",
+  "projectName": "Test Case Generator",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement file upload functionality that accepts Word document files (.doc, .docx) containing user stories and requirements",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "takes word documents of user stories, requirements"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can select and upload Word document files from their device",
+        "Upload interface clearly indicates accepted file formats (.doc, .docx)",
+        "System provides feedback during upload process"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Parse uploaded Word documents to extract user stories and requirements text content",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "takes word documents of user stories, requirements"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend successfully extracts text content from .doc and .docx files",
+        "Parsed content preserves structure and formatting relevant to requirements analysis",
+        "System handles parsing errors gracefully with appropriate error messages"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Generate functional test cases with detailed steps and preconditions when applicable based on parsed requirements",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "generate 100% correct test cases with steps, precondition (if needed)",
+          "The test cases should be functional"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each functional test case includes numbered execution steps",
+        "Preconditions are listed when necessary for test execution",
+        "Test cases accurately reflect the functional requirements from the document",
+        "Generated test cases are comprehensive and actionable"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Generate boundary test cases that test limits and edge conditions of the requirements",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The test cases should be functional, boundary, edge cases"
+        ]
+      },
+      "acceptanceCriteria": [
+        "System identifies numerical limits, ranges, and boundaries from requirements",
+        "Boundary test cases test minimum, maximum, and just-outside-boundary values",
+        "Test cases clearly identify which boundary condition is being tested"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Generate edge case test cases that cover unusual or extreme scenarios",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The test cases should be functional, boundary, edge cases"
+        ]
+      },
+      "acceptanceCriteria": [
+        "System generates test cases for empty inputs, null values, and special characters",
+        "Edge cases cover unusual but valid scenarios mentioned in requirements",
+        "Test cases identify potential system breaking points"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Generate exploratory test cases that encourage creative testing approaches beyond specified requirements",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The test cases should be functional, boundary, edge cases, exploratory"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Exploratory test cases suggest areas for investigation and discovery",
+        "Test cases encourage testing of interactions between features",
+        "Generated exploratory scenarios are relevant to the application domain"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Generate both positive test cases (expected behavior) and negative test cases (error handling and invalid inputs)",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Consider positive and negative test cases"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Positive test cases verify expected functionality works correctly",
+        "Negative test cases verify error handling for invalid inputs and operations",
+        "Each test case is clearly labeled as positive or negative",
+        "Coverage includes all major requirement scenarios"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Order generated test cases in a natural execution sequence that follows logical testing flow",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The sequence of test cases should be the natural order of execution"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Test cases are ordered from setup/precondition tests to main functionality to cleanup",
+        "Dependencies between test cases are respected in the ordering",
+        "Sequence follows a logical progression that a tester would naturally follow",
+        "Test case numbering reflects execution order"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Display generated test cases in an organized, readable format with clear categorization by test type (functional, boundary, edge, exploratory, positive, negative)",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The test cases should be functional, boundary, edge cases, exploratory",
+          "Consider positive and negative test cases"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Test cases are grouped by category with clear visual separation",
+        "Each test case displays test ID, title, steps, preconditions, and expected results",
+        "Interface allows users to easily navigate between test case categories",
+        "Users can export or copy generated test cases"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Apply a professional, testing-focused visual design that emphasizes clarity and readability with a modern, sophisticated color scheme and clean typography",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Design uses a cohesive color palette appropriate for a testing/QA tool",
+        "Typography is clear and optimized for reading technical content",
+        "Layout emphasizes information hierarchy and scanability",
+        "Visual style is consistent across all screens and components"
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must use Motoko with single-actor architecture",
+    "Frontend must use React with TypeScript, Tailwind CSS, and Shadcn components",
+    "All Motoko logic must reside in backend/main.mo",
+    "Do not modify immutable frontend paths (useInternetIdentity hooks, useActor.ts, main.tsx, components/ui)"
+  ],
+  "nonGoals": [
+    "Integration with external AI services or LLMs",
+    "Real-time collaborative editing of test cases",
+    "Integration with test management tools like JIRA or TestRail",
+    "Automated test execution or CI/CD pipeline integration",
+    "Support for file formats other than Word documents (.doc, .docx)"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,2 +1,3 @@
-# test-case-generator_1
-Exported from Caffeine project: Test Case Generator
+## Test Case Generator
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
